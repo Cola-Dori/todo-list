@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production",
-    "start-json-server": "./src/server.js",
+    "start-json-server": "babel-node ./src/server.js",
     "start-webpack-dev-server": "webpack serve --open --mode=development",
     "start": "concurrently \"npm run start-json-server\" \"npm run start-webpack-dev-server\""
   },
@@ -21,6 +21,10 @@
     "url": "https://github.com/Cola-Dori/todo-list/issues"
   },
   "homepage": "https://github.com/Cola-Dori/todo-list#readme",
+  "dependencies": {
+    "json-server": "^0.17.0",
+    "lowdb": "^1.0.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.8",
@@ -42,8 +46,6 @@
     "sass-loader": "^12.6.0",
     "webpack": "^5.71.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4",
-    "json-server": "^0.17.0",
-    "lowdb": "^1.0.0"
+    "webpack-dev-server": "^4.7.4"
   }
 }

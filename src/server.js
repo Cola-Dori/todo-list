@@ -1,11 +1,10 @@
-const jsonServer = require('json-server');
-const low = require('lowdb');
+import jsonServer from 'json-server';
+import low from 'lowdb';
+import FileSync from 'lowdb/adapters/FileSync';
 
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
-
-const FileSync = require('lowdb/adapters/FileSync');
 
 const adapter = new FileSync('db.json');
 const db = low(adapter);
