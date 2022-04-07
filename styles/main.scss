@@ -2,8 +2,7 @@
 @import './scss/base/normalize';
 @import './scss/base/reset';
 
-//@import './scss/components';
-
+@import './scss/constants/colors';
 @import './scss/constants/z-index';
 
 @import './scss/mixins/flexbox';
