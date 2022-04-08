@@ -6,9 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production",
-    "start-json-server": "babel-node ./src/server.js",
-    "start-webpack-dev-server": "webpack serve --open --mode=development",
-    "start": "concurrently \"npm run start-json-server\" \"npm run start-webpack-dev-server\""
+    "start": "webpack serve --open --mode=development"
   },
   "repository": {
     "type": "git",
@@ -22,15 +20,13 @@
   },
   "homepage": "https://github.com/Cola-Dori/todo-list#readme",
   "dependencies": {
-    "json-server": "^0.17.0",
-    "lowdb": "^1.0.0"
+    "lowdb": "^3.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
     "babel-loader": "^8.2.4",
-    "concurrently": "^7.1.0",
     "core-js": "^3.21.1",
     "css-loader": "^6.7.1",
     "eslint": "^8.12.0",
