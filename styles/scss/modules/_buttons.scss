@@ -1,6 +1,7 @@
 %button-base {
   @include font(14px, $white);
   width: 134px;
+  height: 40px;
   padding: 10px;
   border-radius: 6px;
 }
@@ -23,11 +24,11 @@
 .button-normal {
   @extend %button-base;
   font-weight: normal;
-  background-color: $gray4;
   color: $gray3;
-  
+  background-color: $gray4;
+
   &:hover {
-    background-color: $gray3;
     color: $white;
+    background-color: $gray3;
   }
 }
