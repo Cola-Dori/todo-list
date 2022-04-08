@@ -4,9 +4,17 @@
 
 @import './scss/constants/colors';
 @import './scss/constants/z-index';
+@import './scss/constants/box-shadow';
 
 @import './scss/mixins/flexbox';
 @import './scss/mixins/font';
 @import './scss/mixins/pos-align';
+@import './scss/mixins/scrollbar';
 
 @import './scss/components/header';
+@import './scss/components/main';
+@import './scss/components/todo-column';
+@import './scss/components/todo-list';
+
+@import './scss/modules/badge';
+@import './scss/modules/buttons';
