@@ -58,9 +58,26 @@ const initDb = columns => {
   column2.write();
   column3.write();
 };
-
 initDb(columns);
 
-export default {};
+const getData = key => {
+  const db = new LowSync(new LocalStorage(key));
+  db.read();
+  return db.data;
+};
+const getColumns = () => {
+  const columnsData = columns.data.reduce((result, columnKey) => {
+    result.push(getData(columnKey));
+    return result;
+  }, []);
+
+  return columnsData;
+};
+
+export default {
+  columns,
+  getData,
+  getColumns,
+};
 
 // 여기에 데이터 get, post, delete, patch, move 메서드 추가해서 export 하면 될 듯 합니다.
