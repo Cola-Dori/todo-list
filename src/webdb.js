@@ -1,8 +1,20 @@
 import { LowSync, LocalStorage } from 'lowdb';
 import { v4 as uuidv4 } from 'uuid';
 
-const columns = new LowSync(new LocalStorage('columns'));
-columns.read();
+const getData = key => {
+  const db = new LowSync(new LocalStorage(key));
+  db.read();
+  return db.data;
+};
+
+const getColumns = () => {
+  const columnsData = columns.data.reduce((result, columnKey) => {
+    result.push(getData(columnKey));
+    return result;
+  }, []);
+
+  return columnsData;
+};
 
 const initDb = columns => {
   if (columns.data) return;
@@ -24,10 +36,18 @@ const initDb = columns => {
       {
         id: uuidv4(),
         columnId: column1Key,
-        title: 'HTML',
-        desc: 'HTML',
+        title: 'GitHub 공부하기',
+        desc: 'add, commit, push',
         author: 'web',
-        createdAt: Date.now(),
+        createAt: Date.now(),
+      },
+      {
+        id: uuidv4(),
+        columnId: column1Key,
+        title: '블로그에 포스팅할 것',
+        desc: '*Github 공부내용\n*모던 자바스크립트 1장 공부내용',
+        author: 'web',
+        createAt: Date.now(),
       },
     ],
   };
@@ -38,11 +58,11 @@ const initDb = columns => {
     cards: [
       {
         id: uuidv4(),
-        columnId: column2Key,
-        title: 'CSS',
-        desc: 'CSS',
+        columnId: column1Key,
+        title: 'HTML/CSS 공부하기',
+        desc: 'input 태그 실습',
         author: 'web',
-        createdAt: Date.now(),
+        createAt: Date.now(),
       },
     ],
   };
@@ -50,28 +70,14 @@ const initDb = columns => {
   column3.data = {
     id: column3Key,
     title: '완료한 일',
-    cards: [{ id: uuidv4(), columnId: column3Key, title: 'JS', desc: 'JS', author: 'web', createdAt: Date.now() }],
+    cards: [],
   };
 
   columns.write();
   column1.write();
   column2.write();
   column3.write();
-};
-initDb(columns);
-
-const getData = key => {
-  const db = new LowSync(new LocalStorage(key));
-  db.read();
-  return db.data;
-};
-const getColumns = () => {
-  const columnsData = columns.data.reduce((result, columnKey) => {
-    result.push(getData(columnKey));
-    return result;
-  }, []);
-
-  return columnsData;
+  console.log(getData(column3Key));
 };
 
 export default {
@@ -80,4 +86,6 @@ export default {
   getColumns,
 };
 
-// 여기에 데이터 get, post, delete, patch, move 메서드 추가해서 export 하면 될 듯 합니다.
+const columns = new LowSync(new LocalStorage('columns'));
+columns.read();
+initDb(columns);
