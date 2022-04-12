@@ -1,4 +1,4 @@
-import { $, createElement, hasClass } from '../utils/utils';
+import { $, createElement, handleModal, hasClass } from '../utils/utils';
 
 export default class TodoCard {
   constructor({ id, columnId, columnIdx, title = '', desc = '', author = '', createdAt }) {
@@ -17,6 +17,9 @@ export default class TodoCard {
   listen() {
     this.$todoCard.addEventListener('@clickCancelButton', event => {
       this.handleClickCancelButton(event);
+    });
+    this.$todoCard.addEventListener('@clickDeleteCardButton', event => {
+      this.handleClickDeleteButton(event);
     });
   }
 
@@ -43,6 +46,10 @@ export default class TodoCard {
   handleClickCancelButton(event) {
     const $todoCard = event.target;
     $todoCard.parentNode.removeChild($todoCard);
+  }
+
+  handleClickDeleteButton() {
+    handleModal();
   }
 }
 

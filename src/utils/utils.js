@@ -77,3 +77,7 @@ export const throttle = (cb, delay) => {
     }, delay);
   };
 };
+
+export const handleModal = () => {
+  removeClass('hidden', $('.modal'));
+};

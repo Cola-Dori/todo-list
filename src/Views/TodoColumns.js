@@ -26,6 +26,15 @@ export default class TodoColumns {
         this.handleClickCancelButton(event);
       },
     });
+
+    eventDelegate({
+      target: this.$todoColumns,
+      eventName: 'click',
+      selector: '.todo-item .delete-button',
+      handler: event => {
+        this.handleClickDeleteCardButton(event);
+      },
+    });
   }
 
   init(columnsData) {
@@ -51,5 +60,10 @@ export default class TodoColumns {
   handleClickCancelButton(event) {
     const $targetCard = event.target.closest('.todo-item');
     emit($targetCard, '@clickCancelButton');
+  }
+
+  handleClickDeleteCardButton(event) {
+    const $targetCard = event.target.closest('.todo-item');
+    emit($targetCard, '@clickDeleteCardButton');
   }
 }
