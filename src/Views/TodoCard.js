@@ -1,7 +1,7 @@
 import { $, createElement, hasClass } from '../utils/utils';
 
 export default class TodoCard {
-  constructor({ id, columnId, columnIdx, title = '', desc = '', author = '', createdAt }) {
+  constructor({ id, columnId, columnIdx, title = '', desc = '', author = 'web', createdAt }) {
     this.id = id;
     this.columnId = columnId; // -> db저장용 key
     this.columnIdx = columnIdx; // -> 카드의 위치 (브라우저에 렌더링 해야하는 위치 정보)
@@ -46,6 +46,8 @@ export default class TodoCard {
   }
 }
 
+const replaceLFWithBrElement = text => text.replace(/\n/g, '<br>');
+
 const createTodoCard = (id, title, desc, author) => {
   const $todoCard = createElement('li', 'todo-item', {
     'data-id': id,
@@ -55,10 +57,10 @@ const createTodoCard = (id, title, desc, author) => {
     <div class="todo-form">
       <div class="todo-item-textarea">
         <header class="todo-item-title">
-          <textarea placeholder="제목을 입력하세요" rows="1">${title}</textarea>
+          <p>${replaceLFWithBrElement(title)}</p>
         </header>
         <div class="todo-item-desc">
-          <textarea placeholder="내용을 입력하세요" rows="1">${desc}</textarea>
+          <p>${replaceLFWithBrElement(desc)}</p>          
         </div>
         <footer class="todo-item-author">
           author by
@@ -74,6 +76,5 @@ const createTodoCard = (id, title, desc, author) => {
       <button type="button" class="register-button button-accent" disabled="disabled">등록</button>
     </footer>
   `;
-
   return $todoCard;
 };
