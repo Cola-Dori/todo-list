@@ -16,7 +16,7 @@ export default class TodoColumns {
   }
 
   render() {
-    const $$todoColumn = this.todoColumns.map(column => column.$todoList);
+    const $$todoColumn = this.todoColumns.map(column => column.$todoColumn);
     this.$todoColumns.append(...$$todoColumn);
   }
 }
