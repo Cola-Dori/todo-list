@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import TodoCard from './TodoCard';
-import { createElement, $, addClass } from '../utils/utils';
+import { $, addClass, createElement } from '../utils/utils';
 
 export default class TodoColumn {
   constructor({ cards: cardsData, id, idx, title }) {
@@ -31,6 +31,7 @@ export default class TodoColumn {
 
     this.render();
   }
+
   // TODO: 타이틀 업데이트
 
   // TODO: 배지 업데이트
@@ -53,9 +54,9 @@ export default class TodoColumn {
       columnIdx: this.idx,
     });
     addClass('active-item', $todoCard);
-    replaceParagraphWithTextarea($todoCard);
+    TodoCard.replaceParagraphWithTextarea($todoCard);
     this.$todoList.prepend($todoCard);
-    // '카드 수정'의 경우, textarea의 높이를 scrollHeight로 조절 추가.
+    // '카드 수정'의 경우, 위와 비슷한 로직 + textarea의 높이를 scrollHeight로 조절 추가.
   }
 }
 
@@ -86,48 +87,4 @@ const createTodoColumn = (id, title, cardsData) => {
   `;
 
   return $todoColumn;
-};
-
-// p -> textarea로 바꾸기 / textarea -> p로 바꾸기
-// todoCard의 static method로 넣는게 좋을까요?
-const replaceParagraphWithTextarea = $todoCard => {
-  const $titleParagraph = $('.todo-item-title p', $todoCard);
-  const $descParagraph = $('.todo-item-desc p', $todoCard);
-
-  const $titleTextarea = createElement('textarea', undefined, {
-    placeholder: '제목을 입력하세요',
-    rows: 1,
-  });
-  const $descTextarea = createElement('textarea', undefined, {
-    placeholder: '내용을 입력하세요',
-    rows: 1,
-  });
-
-  const title = $titleParagraph.innerHTML;
-  const desc = $descParagraph.innerHTML;
-
-  $titleTextarea.value = title.replace(/<br\s*\/?>/g, '\n');
-  $descTextarea.value = desc.replace(/<br\s*\/?>/g, '\n');
-
-  $titleParagraph.replaceWith($titleTextarea);
-  $descParagraph.replaceWith($descTextarea);
-};
-
-// todoCard 인스턴스 초기화 과정에서 $todoCard 엘리먼트 생성할 때 title, desc는 개행문자 <br>로 치환해서 넣는거로 수정해서,
-// 만약 카드 수정 -> db 컬럼 업데이트 -> 업데이트된 db 컬럼을 기반으로 엘리먼트 다시 생성하여 리렌더하는 경우는 필요없는 함수
-const replaceTextareaWithParagraph = $todoCard => {
-  const $titleTextarea = $('.todo-item-title textarea', $todoCard);
-  const $descTextarea = $('.todo-item-desc textarea', $todoCard);
-
-  const $titleParagraph = createElement('p');
-  const $descParagraph = createElement('p');
-
-  const title = $titleTextarea.value;
-  const desc = $descTextarea.value;
-
-  $titleParagraph.innerHTML = title.replace(/\n/g, '</br />');
-  $descParagraph.innerHTML = desc.replace(/\n/g, '</br />');
-
-  $titleTextarea.replaceWith($titleParagraph);
-  $descTextarea.replaceWith($descParagraph);
 };
