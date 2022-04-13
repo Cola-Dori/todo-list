@@ -1,4 +1,4 @@
-import { $, createElement, handleModal, hasClass } from '../utils/utils';
+import { $, createElement, hasClass, openModal } from '../utils/utils';
 
 export default class TodoCard {
   constructor({ id, columnId, columnIdx, title = '', desc = '', author = '', createdAt }) {
@@ -49,7 +49,7 @@ export default class TodoCard {
   }
 
   handleClickDeleteButton() {
-    handleModal();
+    openModal({ title: '선택한 카드를 삭제할까요?', accentText: '삭제' });
   }
 }
 

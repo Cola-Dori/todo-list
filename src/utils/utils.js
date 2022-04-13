@@ -78,6 +78,15 @@ export const throttle = (cb, delay) => {
   };
 };
 
-export const handleModal = () => {
+export const openModal = modalContent => {
+  const { title, accentText } = modalContent;
+  const $modalTitle = $('.modal .modal-title');
+  const $modalAccentText = $('.modal .button-accent');
+  $modalTitle.innerText = title;
+  $modalAccentText.innerText = accentText;
   removeClass('hidden', $('.modal'));
+};
+
+export const closeModal = () => {
+  addClass('hidden', $('.modal'));
 };
