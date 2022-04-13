@@ -1,7 +1,7 @@
+import modal from './Modal';
 import {
   $,
   hasClass,
-  openModal,
   createElement,
   replaceBrElementWithLinebreak,
   replaceLinebreakWithBrElement,
@@ -100,7 +100,8 @@ export default class TodoCard {
   }
 
   handleClickDeleteButton() {
-    openModal({ title: '선택한 카드를 삭제할까요?', accentText: '삭제' });
+    modal.setContents({ title: '선택한 카드를 삭제할까요?', accentText: '삭제' });
+    modal.openModal();
   }
 }
 
