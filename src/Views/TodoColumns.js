@@ -29,6 +29,15 @@ export default class TodoColumns {
 
     eventDelegate({
       target: this.$todoColumns,
+      eventName: 'input',
+      selector: '.todo-form textarea',
+      handler: event => {
+        this.handleInputTextarea(event);
+      },
+    });
+
+    eventDelegate({
+      target: this.$todoColumns,
       eventName: 'click',
       selector: '.todo-item .delete-button',
       handler: event => {
@@ -65,5 +74,11 @@ export default class TodoColumns {
   handleClickDeleteCardButton(event) {
     const $targetCard = event.target.closest('.todo-item');
     emit($targetCard, '@clickDeleteCardButton');
+  }
+
+  handleInputTextarea(event) {
+    const $targetTextarea = event.target;
+    $targetTextarea.style.height = 'auto';
+    $targetTextarea.style.height = `${$targetTextarea.scrollHeight}px`;
   }
 }

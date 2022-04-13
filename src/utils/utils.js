@@ -90,3 +90,7 @@ export const openModal = modalContent => {
 export const closeModal = () => {
   addClass('hidden', $('.modal'));
 };
+
+export const replaceLinebreakWithBrElement = text => text.replace(/(\r\n|\r|\n)/g, '<br>');
+
+export const replaceBrElementWithLinebreak = text => text.replace(/<br\s?\/?>/g, '\n');
